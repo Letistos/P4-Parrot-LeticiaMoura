@@ -1,49 +1,88 @@
-//function escolherCarta(classeCarta){
-//    const carta = document.querySelector(classeCarta);
-//   carta.classList.add ('cursor-carta');
-//}
-//function Naoescolher(classeCarta){
-//    const leave = document.querySelector(classeCarta .cursor-carta);
-//    leave.classList.remove('cursor-carta');
-//
-//
-alert("Olá, esse é o PARROT CARD GAME versão Bongo Cat! Para começar, escolha uma quantidade de pares de cartas, entre 2 e 7.");
+// -- saudação -- //
+prompt('com quantas cartas quer jogar?');
 
-function qtdeCartas(){
 
-    input = prompt("com quantas cartas quer jogar?")
-    if (input%2 != 0 && input < 2){
-        alert("Essa quantidade de cartas é inválida");
-    }
-    if(input == 2){
-        alert("4 cartas é o mínimo para jogar");
-    }
-    if(input == 0){
-        alert("Essa quantidade de cartas é inválida");
-    }
-    if (input%2 != 0 && input > 2){
-        alert("Essa quantidade de cartas é inválida");
-    }
-    if(input > 14){
-        alert("Desculpe,mas o número máximo de Cartas é 14!")
-    }
-}
+// -- fim saudação -- //
+
+// -- dispor cartas no main -- //
 
 
 
+const deck = document.querySelectorAll('.card-box');
 
+let estaVirada = false;
 
+let cartaUm;
 
+let cartaDois;
 
-const cartas= document.querySelector('.main-box');
-//está selecionando todas as cartas e adicionando na gaveta cartas
+//  virar cartas //
 
 function virarCarta(){
-       
-    this.classList.toggle('flip');
-    //está trocando a classe
+
+    this.classList.add('flip');
+
+    if(estaVirada == false){
+    estaVirada = true;
+    cartaUm = this;
+    return;
+    }
+
+    cartaDois = this;
+    estaVirada = false;
+
+    encontrarPares();
+}
+// -- fim virar cartas -- //
+
+// --encontrar pares --//
+
+function encontrarPares(){
+   let par =  cartaUm.dataset.card == cartaDois.dataset.card;
+   if(par == false){
+
+   desvirarCarta();
+   }
+}
+// --fim encontrar pares --//
+
+// --manter pares abertos--//
+
+function manterAberto(){
+
+    cartaUm.addEventListener('click',flip);
 
 }
-//function contarCLiques(){
-    //quando o jogador terminar, deve emitir um aviso de quantos cliques ele fez durante o jogo
-//}
+// --fim de manter pares abertos -- //
+
+// -- desvirar quando nao e par -- //
+
+function desvirarCarta(){
+    
+    setTimeout(() => {
+    cartaUm.classList.remove('flip');
+    cartaDois.classList.remove('flip');
+    },1000);
+
+}
+
+// -- fim de desvirar quando nao e par -- //
+deck.forEach(carta => carta.addEventListener('click',virarCarta));
+
+
+
+// -- embaralhar cartas -- //
+// -- fim embaralhar cartas -- //
+
+// -- contar cliques -- //
+// -- fim contar cliques -- //
+
+
+
+//let cartaUm
+//let cartaDois
+
+
+
+
+
