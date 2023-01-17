@@ -72,6 +72,9 @@ img{
     transform-style: preserve-3d;
    
 }
+.naomostrar{
+    display: none;
+}
 @media(max-width: 360px /*Samsung Galaxy S8+*/){
     body{
         width: auto;
